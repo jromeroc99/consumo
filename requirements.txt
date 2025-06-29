@@ -1,10 +1,12 @@
+fastapi
+uvicorn
 pandas
 numpy
+joblib
+torch
 pvlib
 #tensorflow
 pymongo
 python-dotenv
 pydantic
-torch
 scikit-learn
-joblib
