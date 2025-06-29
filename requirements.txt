@@ -5,3 +5,6 @@ pvlib
 pymongo
 python-dotenv
 pydantic
+torch
+scikit-learn
+joblib

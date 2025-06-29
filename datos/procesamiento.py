@@ -10,7 +10,6 @@ load_dotenv()
 
 MONGO_URI = os.getenv('MONGO_URI')
 DB_NAME = 'tfmJavi'
-
 LATITUD, LONGITUD = 36.7347194, -4.3563086
 
 # Lista de días festivos nacionales en España (formato YYYY-MM-DD)
@@ -27,9 +26,6 @@ FESTIVOS_ES = set([pd.to_datetime(f).date() for f in FESTIVOS_ES])
 class ProcesadorDatos:
     """
     Clase para descargar, limpiar, transformar y combinar datos de MongoDB para análisis energético.
-
-    Métodos principales:
-        - obtener_df_limpia: Devuelve un DataFrame limpio y listo para análisis/modelado.
     """
     def __init__(self, uri: str, db_name: str, lat: float, lon: float):
         self.uri = uri
@@ -131,7 +127,7 @@ class ProcesadorDatos:
         df = df.copy()
         mask_nan = df['festivo'].isna()
         fechas = df.loc[mask_nan, 'tiempo'].dt.date
-        df.loc[mask_nan, 'festivo'] = fechas.apply(lambda d: 1 if d in FESTIVOS_ES else 0)
+        df.loc[mask_nan, 'festivo'] = fechas.apply(lambda d: 1.0 if d in FESTIVOS_ES else 0.0).astype(float)
         df['festivo'] = df['festivo'].astype(int)
         return df
 
@@ -152,4 +148,22 @@ class ProcesadorDatos:
         df = self.limpiar_e_imputar(df)
         df = self.rellenar_festivos(df)
         df_limpio = df.dropna()
-        return df_limpio 
+        return df_limpio
+
+if __name__ == "__main__":
+    # Ejemplo de uso del procesador de datos
+    try:
+        if MONGO_URI is None:
+            raise ValueError("MONGO_URI no está definida en el entorno. Por favor, añade la variable al archivo .env")
+        # Instanciar el procesador con los parámetros de conexión y localización
+        procesador = ProcesadorDatos(MONGO_URI, DB_NAME, LATITUD, LONGITUD)
+        # Obtener el DataFrame limpio
+        df_limpio = procesador.obtener_df_limpia()
+        # Mostrar las primeras filas y el número total de filas limpias
+        print(df_limpio.head())
+        print(f"Filas totales limpias: {len(df_limpio)}")
+        print("Columnas y tipos:")
+        print(df_limpio.dtypes)
+        
+    except Exception as e:
+        print(f"Error al procesar datos: {e}") 

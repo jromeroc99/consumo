@@ -208,3 +208,8 @@ __marimo__/
 
 # csv
 *.csv
+
+# Modelos y scalers
+modelo_consumo.pth
+scaler_X.pkl
+scaler_y.pkl
