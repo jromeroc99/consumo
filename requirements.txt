@@ -1,0 +1,7 @@
+pandas
+numpy
+pvlib
+#tensorflow
+pymongo
+python-dotenv
+pydantic
