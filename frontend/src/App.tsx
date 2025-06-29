@@ -80,10 +80,10 @@ export default function App() {
             mb: 1,
           }}
         >
-          Consumo Energético
+          Potencia eléctrica
         </Typography>
         <Typography align="center" sx={{ color: '#888', mb: 4, fontSize: 16, fontWeight: 400 }}>
-          Predicción del consumo energético de la vivienda
+          Predicción de la potencia eléctrica de la vivienda
         </Typography>
         <Box
           component="form"
@@ -184,12 +184,12 @@ export default function App() {
             </Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, justifyContent: 'space-between' }}>
               <FormControlLabel
-                control={<Switch checked={form.Papa} onChange={handleChange} name="Papa" color="primary" />}
+                control={<Switch checked={form.Papa} onChange={handleChange} name="Felipe" color="primary" />}
                 label="Papa"
                 sx={{ m: 0, '.MuiFormControlLabel-label': { fontWeight: 400, color: '#444' } }}
               />
               <FormControlLabel
-                control={<Switch checked={form.Mama} onChange={handleChange} name="Mama" color="primary" />}
+                control={<Switch checked={form.Mama} onChange={handleChange} name="Esther" color="primary" />}
                 label="Mama"
                 sx={{ m: 0, '.MuiFormControlLabel-label': { fontWeight: 400, color: '#444' } }}
               />
@@ -247,9 +247,9 @@ export default function App() {
             ) : (
               <>
                 <Typography variant="h6" sx={{ color: '#007aff', fontWeight: 700, mb: 1, fontSize: 20 }}>Resultado</Typography>
-                <Typography sx={{ fontSize: 18, fontWeight: 500, color: '#222', mb: 0.5 }}>Fase 0: <span style={{ color: '#007aff' }}>{result.fase0.toFixed(2)}</span></Typography>
-                <Typography sx={{ fontSize: 18, fontWeight: 500, color: '#222', mb: 0.5 }}>Fase 1: <span style={{ color: '#007aff' }}>{result.fase1.toFixed(2)}</span></Typography>
-                <Typography sx={{ fontSize: 18, fontWeight: 500, color: '#222' }}>Fase 2: <span style={{ color: '#007aff' }}>{result.fase2.toFixed(2)}</span></Typography>
+                <Typography sx={{ fontSize: 18, fontWeight: 500, color: '#222', mb: 0.5 }}>Fase 0 [W]: <span style={{ color: '#007aff' }}>{result.fase0.toFixed(2)}</span></Typography>
+                <Typography sx={{ fontSize: 18, fontWeight: 500, color: '#222', mb: 0.5 }}>Fase 1 [W]: <span style={{ color: '#007aff' }}>{result.fase1.toFixed(2)}</span></Typography>
+                <Typography sx={{ fontSize: 18, fontWeight: 500, color: '#222' }}>Fase 2 [W]: <span style={{ color: '#007aff' }}>{result.fase2.toFixed(2)}</span></Typography>
               </>
             )}
           </Box>
